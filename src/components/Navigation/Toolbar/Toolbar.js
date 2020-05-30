@@ -3,12 +3,17 @@ import classes from "./Toolbar.module.css";
 import Logo from "../../Logo/Logo";
 import NavigationItems from "./../NavigationItems/NavigationItems";
 
-const Toolbar = () => {
+import DrawerToogle from "../SideDrawer/DrawerToggle/DrawerToogle";
+
+const Toolbar = (props) => {
   return (
     <header className={classes.Toolbar}>
-      <div>Menu</div>
-      <Logo />
-      <nav>
+      <DrawerToogle clicked={props.toogleSideDrawer} />
+      <div className={classes.Logo}>
+        <Logo />
+      </div>
+
+      <nav className={classes.DesktopOnly}>
         <NavigationItems />
       </nav>
     </header>

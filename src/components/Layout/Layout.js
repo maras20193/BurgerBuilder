@@ -1,14 +1,37 @@
-import React from "react";
+import React, { Component } from "react";
 import classes from "./Layouts.module.css";
 import Toolbar from "./../Navigation/Toolbar/Toolbar";
+import SideDrawer from "../Navigation/SideDrawer/SideDrawer";
 
-const Layout = (props) => {
-  return (
-    <>
-      <Toolbar />
-      <main className={classes.Content}>{props.children}</main>
-    </>
-  );
-};
+class Layout extends Component {
+  state = {
+    showSideDrawer: false,
+  };
+
+  sideDrawerClosedHandler = () => {
+    this.setState({ showSideDrawer: false });
+  };
+  sideDrawerOpenHandler = () => {
+    this.setState({ showSideDrawer: true });
+  };
+  sideDrawerToogleHandler = () => {
+    this.setState((prevState) => {
+      return { showSideDrawer: !prevState.showSideDrawer };
+    });
+  };
+
+  render() {
+    return (
+      <>
+        <Toolbar toogleSideDrawer={this.sideDrawerToogleHandler} />
+        <SideDrawer
+          closed={this.sideDrawerClosedHandler}
+          open={this.state.showSideDrawer}
+        />
+        <main className={classes.Content}>{this.props.children}</main>
+      </>
+    );
+  }
+}
 
 export default Layout;
