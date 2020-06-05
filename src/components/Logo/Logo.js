@@ -6,6 +6,7 @@ const Logo = (props) => {
   return (
     <div className={classes.Logo} style={{ height: props.height }}>
       <img src={burgerLogo} alt="logo" />
+      {/* <i class="fas fa-hamburger"></i> */}
     </div>
   );
 };

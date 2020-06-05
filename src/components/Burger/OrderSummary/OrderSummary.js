@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Button from "./../../UI/Button/Button";
+import classes from "./OrderSummary.module.css";
 
 class OrderSummary extends Component {
   componentDidUpdate() {
@@ -19,17 +20,19 @@ class OrderSummary extends Component {
     );
     return (
       <>
-        <h3>Your Order</h3>
-        <p>Delicious burger with the following ingredients</p>
-        <ul>{ingredientSummary}</ul>
-        <strong>Total Price: {this.props.price.toFixed(2)}$</strong>
-        <p>Continue to Checkaout?</p>
-        <Button btnType="Danger" clicked={this.props.purchaseCancel}>
-          CANCEL
-        </Button>
-        <Button btnType="Success" clicked={this.props.purchaseContinue}>
-          CONTINUE
-        </Button>
+        <div className={classes.OrderSummary}>
+          <h3>Your Order</h3>
+          <p>Delicious burger with the following ingredients</p>
+          <ul>{ingredientSummary}</ul>
+          <strong>Total Price: {this.props.price.toFixed(2)}$</strong>
+          <p>Continue to Checkaout?</p>
+          <Button btnType="Danger" clicked={this.props.purchaseCancel}>
+            CANCEL
+          </Button>
+          <Button btnType="Success" clicked={this.props.purchaseContinue}>
+            CONTINUE
+          </Button>
+        </div>
       </>
     );
   }
