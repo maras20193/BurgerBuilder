@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Layout from "./components/Layout/Layout";
 import BurgerBuilder from "./conteiners/BurgerBuilder/BurgerBuilder";
-import Checkout from "./conteiners/Checkout/Checkaout";
+import Checkout from "./conteiners/Checkout/Checkout";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 

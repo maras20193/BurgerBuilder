@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Button from "../../../components/UI/Button/Button";
 import classes from "./ContactData.module.css";
+import axiosInstance from "../../../axios-orders";
+import Spinner from "../../../components/UI/Spinner/Spinner";
 
 class ContactData extends Component {
   state = {
@@ -16,33 +18,35 @@ class ContactData extends Component {
   orderHandler = (e) => {
     e.preventDefault();
 
-    // this.setState({
-    //   loading: true,
-    // });
-    // const order = {
-    //   ingredients: this.props.ingredients,
-    //   price: this.state.totalPrice,
-    //   customer: {
-    //     name: "Lucas",
-    //     address: {
-    //       street: "Lakowa",
-    //       zipCode: "59300",
-    //       country: "Poland",
-    //     },
-    //     email: "lucas@gmail.com",
-    //   },
-    //   deliveryMethod: "fastest",
-    // };
-    // axiosInstance
-    //   .post("/orders.json", order)
-    //   .then((response) => this.setState({ loading: false, purchasing: false }))
-    //   .catch((error) => this.setState({ loading: false, purchasing: false }));
+    this.setState({
+      loading: true,
+    });
+    const order = {
+      ingredients: this.props.ingredients,
+      price: this.state.totalPrice,
+      customer: {
+        name: "Lucas",
+        address: {
+          street: "Lakowa",
+          zipCode: "59300",
+          country: "Poland",
+        },
+        email: "lucas@gmail.com",
+      },
+      deliveryMethod: "fastest",
+    };
+    axiosInstance
+      .post("/orders.json", order)
+      .then((response) => {
+        this.setState({ loading: false });
+        this.props.history.push("/");
+      })
+      .catch((error) => this.setState({ loading: false }));
   };
 
   render() {
-    return (
-      <div className={classes.ContactData}>
-        <h4>Enter Your Contact Data</h4>
+    let form = (
+      <>
         <form>
           <input
             className={classes.Input}
@@ -72,7 +76,18 @@ class ContactData extends Component {
         <Button btnType="Success" clicked={this.orderHandler}>
           ORDER
         </Button>
-      </div>
+      </>
+    );
+    if (this.state.loading) {
+      form = <Spinner />;
+    }
+    return (
+      <>
+        <div className={classes.ContactData}>
+          <h4>Enter Your Contact Data</h4>
+          {form}
+        </div>
+      </>
     );
   }
 }
