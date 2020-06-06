@@ -102,7 +102,6 @@ class BurgerBuilder extends Component {
         this.setState({
           ingredients: response.data,
         });
-        console.log("dane sciagniete");
       });
   }
 

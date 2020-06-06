@@ -17,6 +17,7 @@ class Orders extends Component {
             ...res.data[key],
             id: key,
           });
+          console.log(res);
         }
         this.setState({ loading: false, orders: fetchOrders });
       })
